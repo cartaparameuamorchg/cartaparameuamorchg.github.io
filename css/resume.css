@@ -35,7 +35,7 @@ body { font-family: Georgia; color: #a00251; background: #bbfffa;}
 h2 { font-size: 152% }
 h3, h4 { font-size: 122%; }
 h1, h2, h3, h4 { color: #a00251; }
-p { font-size: 140%; line-height: 18px; padding-right: 3em; }
+p { font-size: 140%; line-height: 18px; }
 a { color: #990003 }
 a:hover { text-decoration: none; }
 strong { font-weight: bold; }
