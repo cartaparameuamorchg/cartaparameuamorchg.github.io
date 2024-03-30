@@ -1,0 +1,149 @@
+
+Atalhos do IntelliJ Idea
+De Basef
+Atalhos
+do IntelliJ Idea
+Geral
+Alt + 1: Focar aba de projetos
+Alt + Shift + Insert: Alterna entre modo de seleção de linha/coluna
+Ctrl + Shift + F12: Expandir a tela
+Na aba de projetos
+Alt + Insert: Para criar um novo arquivo
+Templates de código
+psvm: Criar método main
+sout: System.out.println()
+Ctrl + Alt + C: Cria constante (precisa estar sobre código que permite atribuição)
+Ctrl + Alt + F: Cria field - propriedade da classe (precisa estar sobre código que permite atribuição)
+Ctrl + Alt + V: Cria variável (precisa estar sobre código que permite atribuição)
+Ctrl + Alt + T: Templates de IF, for, while, etc (precisa selecionar o código antes)
+Ctrl + J: Exibe todos os templates disponíveis
+Na aba de código
+Ctrl + Y: Apaga a linha inteira
+Ctrl + D: Duplicar linha atual
+Alt + Shift + Setas: Mover linha atual
+Ctrl + Shift + Setas: Mover linha atual mantendo contexto
+Ctrl + Shift + A: Find Action - mostra todas as ações da IDE em uma lista
+Ctrl + N: Busca rápida de classes
+Ctrl + Shift + N: Busca rápida de arquivos
+Ctrl + B: Inspecionar elemento - go to class, method, declaration, etc
+Ctrl + Alt + L: Reformatar código
+Ctrl + Alt + M: Extrair método - transforma código selecionado em método
+Shift + F6: Renomeia classe, variável, método, etc
+Ctrl + Shift + F6: Usar referência de outra classe
+Shift & Shift: Search everywhere
+Ctrl + Shift + F: Busca por conteúdo de arquivo
+Alt + Enter: Intention actions
+Alt + Insert: Generate shortcut
+Ctrl + F12: Mostra a estrutura do arquivo - por exemplo, exibe métodos de uma classe
+Alt + F7: Find usages - mostra a lista de quem está chamando o método, usando a variável, etc
+Ctrl + G: Ir para linha
+Ctrl + H: Mostrar hierarquia da classe (classes pais)
+Alt + Home: Ir para a barra de navegação
+Ctrl + P: Mostrar parâmetros do método
+Ctrl + Q: Documentação rápida
+Ctrl + / ou Ctrl + Shift + /: Comentar código
+Ctrl + Shift + Alt + T: Métodos de refatoração
+Ctrl + Alt + O: Reajustar imports da classe (remove imports não utilizados)
+www.basef.com.br/index.php/Atalhos_do_IntelliJ_Idea
+1/226/08/2019
+Atalhos do IntelliJ Idea - Basef
+Disponível em "http://www.basef.com.br/index.php?title=Atalhos_do_IntelliJ_Idea&oldid=866"
+Categoria: Java
+Esta página foi modificada pela última vez à(s) 19h09min de 9 de agosto de 2017.
+
+\/\//\\/\//\/\////\/\//\//\/\//\//\/\/\\//\/\//\//\/\//\//\//\//\/\/
+
+Agregados (conjunto de eventos que formam o estado atual de um objeto).
+@Aggregate: Usada para representar um agregado. Um agregado é uma árvore isolada de entidades que é capaz de manipular
+comandos. Quando um comando é despachado para um agregado, o Axon carrega a instância agregada e invoca o método
+manipulador do comando relacionado.
+
+@AggregateIdentifier: Campo usado como identificador do agregado. O Axon irá utilizar esse campo para buscar todos 
+os eventos relacionados ao agregado e carregar seu estado atual.
+
+@CommandHandler: Usada para cadastrar um método ou construtor como manipulador de um comando no barramento de comandos 
+do Axon. O nome do método não faz diferença, porém o mesmo deve receber como parâmetro o comando que será manipulado 
+por ele. Usamos esta anotação em um construtor quando com comando manipulado resultará na criação de um agregado.
+
+@EventSourcingHandler: Anotação que marca um método em um agregado como um manipulador para eventos gerados por esse
+agregado. É usada para ler todos os eventos e montar o estado atual do agregado quando um comando é recebido por exemplo.
+
+daos onde ficam os objetos de acesso a dados.
+entityManager gerenciador das entidades 
+
+jpaVendorAdapter serve para saber qual implementação do jpa que esta sendo usado.
+dataSource gerencia as conexões
+
+@Getter/@Setter Com estas anotações são gerados automaticamente os métodos de recuperação e configuração das propriedades das classes.
+@ToString Não há mais necessidade de iniciar um debugger para ver os campos. Basta deixar que o lombok gere o toString().
+@EqualsAndHashCodeMétodo equals e hashCode são gerados automaticamente para os campos do objeto de forma fácil e simples.
+@DataTodos juntos agora: Um atalho para @ToString, @EqualsAndHashCode, @Getter em todos os campos, e @Setter em todos os campos não-finais. Você ainda pode obter um construtor livre para inicializar seus campos finals!
+@CleanupGestão de recursos automática: Chame com segurança os métodos close() sem problemas.
+@Synchronizedsynchronizeds corretos. Não exponha seus locks.
+@SneakThrowsPara lançar exceções onde antes não se era comum lançar.
+@BuilderPara usar o padrão Builder em sua classe.
+@AllArgsConstructorPara criar um construtor com todos os atributos.
+@NoArgsConstructorPara criar um construtor vazio.
+@RequiredArgsConstructorGera um construtor com todos os campos requeridos. 
+
+
+
+Rest
+
+GET  Obter os dados de um recurso
+POST Cria um novo recurso
+PUT Substituir os dados de um determinado recurso
+PATCH Atualizar parcialmente um determinado recurso
+DELETE Excluir um determinado recurso
+HEAD Similar ao GET, mas utilizado apenas para obter os cabeçalhos de resposta
+OPTIONS Obter quais manipulações podem ser realizadas em um determinado recurso
+
+GET é o metodo de requisição como quando se clica em um link ou acessa um link na barra de endereços do browser.
+PUT Uma requisição PUT é utilizada quando desejamos criar ou atualizar uma informação identificada por uma URL.
+DELETE deve atuar ao contrária do PUT; deve ser utilizado quando você deseja deletar o recurso identificar pela URL, na requisição.
+POST O POST é utilizado quando houver repetição no processo executado no servidor, ou seja, quando uma requisição POST é executada mais de uma vez. Complementando,
+requisições POST devem executar o processo no corpo como um subordinado da URL que você está postando.
+não deve causar modificações ao recurso presente no /clients/, por si só, e sim a um recurso identificado na URL após o /clients/. 
+Por exemplo, pode ser a inclusão de um novo cliente na lista, com um id gerado pelo servidor.
+Requisições PUT são facilmente utilizadas ao invés das requisições POST. Alguns sistemas utilizam apenas um, outros utilizam o POST para operações de criação, 
+e o PUT para operações de atualização (com requisições PUT você sempre fornece a URL completa), outros até utilizam o POST para atualizações e o PUT para criações.
+As vezes, requisições POST são utilizadas para operações de gatilhos/triggers no servidor, e que não se enquadram dentro do paradigma Create/Update/Delete; mas isso,
+de qualquer forma, está fora do escopo do REST. No nosso exemplo, vamos sempre utilizar o PUT.
+
+
+
+
+/\/\/\/\\//\//\/\//\/\/\//\/\//\//\/\/\//\//\/\/\//\
+
+
+Para criar javadoc de uma classe que implementa de uma interface, basta fazer o seu :
+
+/**
+     * Gera código de acesso
+     * @param parametroA {@link TipoDoParametro}.
+     * @param parametroB {@link TipoDoParametro}.
+     * @return {@link TipoDoParametro}.
+ */
+
+na sua interface.
+
+E na classe que implementa basta colocar.
+
+/**
+     * {@inheritDoc}
+  */
+  
+\/\/\//\//\/\//\//\//\/\//\/\/\//////////\/\/\//\//\//\/\//\/\\\\\\\\\\\\\/\/\//\/\//\/
+
+Caminho das Pedras
+
+Ordem BackEnd estrutura
+
+Criar Entities -> Criar as DTOS -> Criar Repositorys -> Criar Services -> Criar Facedes -> Criar Controllers.
+
+
+
+
+
+
+
