@@ -11,7 +11,7 @@ body {
   display: flex;
 }
 
-h1 { font-size: 28px; margin: 50px auto; color: #fff; letter-spacing: 2px; }
+h1 { font-size: 23px; margin: 50px auto; color: #fff; letter-spacing: 2px; }
 
 .blog-slider {
   width: 95%;
