@@ -11,6 +11,8 @@ body {
   display: flex;
 }
 
+h1 { font-size: 48px; margin-inline: auto; color: #fff; text-transform: uppercase; letter-spacing: 3px; }
+
 .blog-slider {
   width: 95%;
   position: relative;
