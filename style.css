@@ -266,3 +266,49 @@ h1 { font-size: 23px; margin: 50px auto; color: #fff; letter-spacing: 2px; }
 }
 
 #hd h1 { font-size: 48px; margin-inline: auto; text-transform: uppercase; letter-spacing: 3px; }
+
+
+.texto-editavel {
+  width: 1097px;
+  height: 695px;
+  /* Adiciona responsividade */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Media queries para ajustar o layout em diferentes tamanhos de tela */
+@media (max-width: 1200px) {
+  .texto-editavel {
+    width: 80vw; /* Ajusta a largura para 80% da largura da viewport */
+    height: auto; /* Ajusta a altura automaticamente */
+    padding: 20px; /* Adiciona um pouco de padding para não ficar muito apertado */
+  }
+}
+
+@media (max-width: 768px) {
+  .texto-editavel {
+    width: 90vw; /* Aumenta a largura para 90% da largura da viewport em telas menores */
+    padding: 15px; /* Ajusta o padding para telas menores */
+  }
+}
+
+@media (max-width: 480px) {
+  .texto-editavel {
+    width: 95vw; /* Aumenta a largura para 95% da largura da viewport em telas muito pequenas */
+    padding: 10px; /* Reduz o padding para telas muito pequenas */
+  }
+}
+
+/* Estilização do contêiner que envolve o texto e o botão */
+.blog-slider__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilização específica para o botão de aplicar para garantir que ele fique abaixo do texto */
+.botao-aplicar {
+  margin-top: 20px; /* Ajuste conforme necessário para mais espaço */
+  align-self: center; /* Centraliza o botão */
+}
+Se o botão d
