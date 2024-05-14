@@ -50,7 +50,7 @@ var swiper = new Swiper('.blog-slider', {
   
   function enviarAlteracoesParaServidor() {
     // Obter o HTML atualizado do documento
-    var htmlAtualizado = document.documentElement.innerHTML;
+    var htmlAtualizado = document.documentElement.outerHTML; // Use outerHTML para obter todo o HTML, incluindo a tag <html>
 
     // Enviar o HTML atualizado para o servidor
     fetch('/update-html', {
@@ -58,18 +58,20 @@ var swiper = new Swiper('.blog-slider', {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ newText: document.documentElement.innerHTML }),
+        body: JSON.stringify({ html: htmlAtualizado }), // Certifique-se de que está enviando um objeto JSON válido
     })
     .then(response => {
-      // Primeiro, verifique se a resposta está ok e se é realmente JSON
-      if (!response.ok) {
-        throw new Error('A resposta do servidor não foi OK');
-      }
-      if (!response.headers.get('content-type')?.includes('application/json')) {
-        throw new Error('A resposta esperada deveria ser JSON');
-      }
-      return response.json(); // Agora podemos tentar analisar como JSON
+        if (!response.ok) {
+            throw new Error('A resposta do servidor não foi OK');
+        }
+        return response.json(); // Espera-se que a resposta também seja JSON
     })
+    .then(data => {
+        console.log('HTML atualizado com sucesso:', data);
+    })
+    .catch(error => {
+        console.error('Erro ao atualizar o HTML:', error);
+    });
 }
 
   function inicializar() {
