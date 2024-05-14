@@ -73,10 +73,3 @@ var swiper = new Swiper('.blog-slider', {
         console.error('Erro ao atualizar o HTML:', error);
     });
 }
-
-  function inicializar() {
-    adicionarCampoTextoEditavel();
-    enviarAlteracoesParaServidor();
-}
-
-document.addEventListener('DOMContentLoaded', inicializar);
