@@ -59,17 +59,18 @@ var swiper = new Swiper('.blog-slider', {
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ html: htmlAtualizado }),
+          body: JSON.stringify({ newText: document.documentElement.innerHTML }),
       })
-      .then(response => response.json())
-      .then(data => {
-          console.log('HTML atualizado com sucesso:', data);
-          alert('Alterações salvas com sucesso!');
+      .then(response => {
+        // Primeiro, verifique se a resposta está ok e se é realmente JSON
+        if (!response.ok) {
+          throw new Error('A resposta do servidor não foi OK');
+        }
+        if (!response.headers.get('content-type')?.includes('application/json')) {
+          throw new Error('A resposta esperada deveria ser JSON');
+        }
+        return response.json(); // Agora podemos tentar analisar como JSON
       })
-      .catch((error) => {
-          console.error('Erro ao atualizar o HTML:', error);
-          alert('Erro ao salvar as alterações.');
-      });
   }
 
   function inicializar() {
