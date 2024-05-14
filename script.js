@@ -37,24 +37,36 @@ var swiper = new Swiper('.blog-slider', {
   
           // Adicionar evento de clique ao botão
           botaoAplicar.addEventListener('click', function() {
-            var textoAtualizado = document.createElement('div');
-            textoAtualizado.classList.add('blog-slider__text');
-            textoAtualizado.innerText = inputEditavel.value;
-            texto.parentNode.replaceChild(textoAtualizado, texto);
-        
-            // Enviar o novo HTML para o servidor
-            fetch('/update-text', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ newText: document.documentElement.innerHTML }),
-            })
-            .then(response => response.text())
-            .then(data => console.log(data))
-            .catch((error) => {
-                console.error('Erro:', error);
-            });
-        });
+              var textoAtualizado = document.createElement('div');
+              textoAtualizado.classList.add('blog-slider__text');
+              textoAtualizado.innerText = inputEditavel.value;
+              texto.parentNode.replaceChild(textoAtualizado, texto);
+  
+              // Enviar o novo HTML para o servidor
+              enviarAlteracoesParaServidor();
+          });
+      });
+  }
+  
+  function enviarAlteracoesParaServidor() {
+      // Obter o HTML atualizado do documento
+      var htmlAtualizado = document.documentElement.innerHTML;
+  
+      // Enviar o HTML atualizado para o servidor
+      fetch('/update-html', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ html: htmlAtualizado }),
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log('HTML atualizado com sucesso:', data);
+          alert('Alterações salvas com sucesso!');
+      })
+      .catch((error) => {
+          console.error('Erro ao atualizar o HTML:', error);
+          alert('Erro ao salvar as alterações.');
       });
   }
