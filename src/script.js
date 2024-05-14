@@ -71,3 +71,10 @@ var swiper = new Swiper('.blog-slider', {
           alert('Erro ao salvar as alterações.');
       });
   }
+
+  function inicializar() {
+    adicionarCampoTextoEditavel();
+    enviarAlteracoesParaServidor();
+}
+
+document.addEventListener('DOMContentLoaded', inicializar);
