@@ -1,0 +1,15 @@
+# Ignorar todos os arquivos .log
+.log
+
+# Ignorar diretório node_modules
+node_modules/
+
+# Ignorar arquivo de configurações locaisDD
+.env
+
+# Ignorar diretório de buildDD
+/dist
+
+# Ignorar arquivos temporáriosDD
+*.tmp
+*.temp
