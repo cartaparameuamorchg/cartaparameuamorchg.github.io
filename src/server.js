@@ -7,7 +7,7 @@ let Octokit;
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -15,36 +15,30 @@ app.use(bodyParser.json());
 const octokit = new Octokit({ auth: process.env.TOKEN_GITHUB });
 
 app.post('/update-text', async (req, res) => {
-    const { index, texto } = req.body; // 'index' não é usado neste exemplo
+    const { filePath, content, commitMessage } = req.body;
 
     try {
-        const path = 'cartaparameuamorchg/index.html';
-        const owner = 'cartaparameuamorchg';
-        const repo = 'cartaparameuamorchg.github.io';
-        const message = 'Atualizar texto via API';
-        const content = Buffer.from(texto).toString('base64');
-
         // Obter o SHA do arquivo atual
         const { data: { sha } } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
-            owner,
-            repo,
-            path,
+            owner: 'cartaparameuamorchg',
+            repo: 'cartaparameuamorchg.github.io',
+            path: filePath,
         });
 
-        // Atualizar o arquivo com o novo conteúdo
+        // Atualizar o arquivo
         await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
-            owner,
-            repo,
-            path,
-            message,
-            content,
-            sha, // SHA do arquivo atual é necessário para a atualização
+            owner: 'cartaparameuamorchg',
+            repo: 'cartaparameuamorchg.github.io',
+            path: filePath,
+            message: commitMessage,
+            content: Buffer.from(content).toString('base64'),
+            sha,
         });
 
-        res.send('Texto atualizado com sucesso no GitHub');
+        res.json({ success: true, message: 'Conteúdo atualizado com sucesso!' });
     } catch (error) {
-        console.error('Erro ao atualizar o texto:', error);
-        res.status(500).send('Erro ao atualizar o texto');
+        console.error('Erro ao atualizar o conteúdo:', error);
+        res.status(500).json({ success: false, message: 'Erro ao atualizar o conteúdo' });
     }
 });
 
