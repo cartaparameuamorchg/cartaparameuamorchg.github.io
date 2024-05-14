@@ -1,9 +1,11 @@
-require('dotenv').config();
+let Octokit;
 
-const { Octokit } = require("@octokit/core");
+(async () => {
+  const octokitModule = await import("@octokit/core");
+  Octokit = octokitModule.Octokit;
+
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const app = express();
 const port = 3000;
 
