@@ -53,7 +53,7 @@ var swiper = new Swiper('.blog-slider', {
     var htmlAtualizado = document.documentElement.outerHTML; // Use outerHTML para obter todo o HTML, incluindo a tag <html>
 
     // Enviar o HTML atualizado para o servidor
-    fetch('/update-html', {
+    fetch('/update-text', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
