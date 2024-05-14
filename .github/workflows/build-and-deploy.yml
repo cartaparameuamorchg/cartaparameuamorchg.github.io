@@ -7,24 +7,15 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      
+      - uses: actions/checkout@v3 # Atualizado para a versão mais recente
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3 # Atualizado para a versão mais recente
         with:
-          node-version: '14'
-      
+          node-version: '20' # Atualizado para usar Node.js 20
+          cache: 'npm'
       - name: Install dependencies
         run: npm install
-      
-      - name: Build
-        run: npm run build
+      - name: Run script
         env:
-          TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
-      
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          branch: gh-pages
-          folder: build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node server.js
