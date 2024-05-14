@@ -1,48 +1,53 @@
 let Octokit;
 
 (async () => {
-  const octokitModule = await import("@octokit/core");
-  Octokit = octokitModule.Octokit;
+    const octokitModule = await import("@octokit/core");
+    Octokit = octokitModule.Octokit;
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const port = process.env.PORT || 3000;
+    const express = require('express');
+    const bodyParser = require('body-parser');
+    const app = express();
+    const port = 3000;
 
-app.use(bodyParser.json());
+    app.use(bodyParser.json());
 
-// Substitua 'TOKEN_GITHUB' pelo seu token de acesso pessoal do GitHub
-const octokit = new Octokit({ auth: process.env.TOKEN_GITHUB });
+    // Substitua 'TOKEN_GITHUB' pelo seu token de acesso pessoal do GitHub
+    const octokit = new Octokit({ auth: process.env.TOKEN_GITHUB });
 
-app.post('/update-text', async (req, res) => {
-    const { filePath, content, commitMessage } = req.body;
+    app.post('/update-text', async (req, res) => {
+        const { index, texto } = req.body; // 'index' não é usado neste exemplo
 
-    try {
-        // Obter o SHA do arquivo atual
-        const { data: { sha } } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
-            owner: 'cartaparameuamorchg',
-            repo: 'cartaparameuamorchg.github.io',
-            path: filePath,
-        });
+        try {
+            const path = 'cartaparameuamorchg/index.html';
+            const owner = 'cartaparameuamorchg';
+            const repo = 'cartaparameuamorchg.github.io';
+            const message = 'Atualizar texto via API';
+            const content = Buffer.from(texto).toString('base64');
 
-        // Atualizar o arquivo
-        await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
-            owner: 'cartaparameuamorchg',
-            repo: 'cartaparameuamorchg.github.io',
-            path: filePath,
-            message: commitMessage,
-            content: Buffer.from(content).toString('base64'),
-            sha,
-        });
+            const { data: { sha } } = await octokit.request(`GET /repos/${owner}/${repo}/contents/${path}`, {
+                owner,
+                repo,
+                path,
+            });
 
-        res.json({ success: true, message: 'Conteúdo atualizado com sucesso!' });
-    } catch (error) {
-        console.error('Erro ao atualizar o conteúdo:', error);
-        res.status(500).json({ success: false, message: 'Erro ao atualizar o conteúdo' });
-    }
-});
+            // Atualizar o arquivo com o novo conteúdo
+            await octokit.request(`PUT /repos/${owner}/${repo}/contents/${path}`, {
+                owner,
+                repo,
+                path,
+                message,
+                content,
+                sha, // SHA do arquivo atual é necessário para a atualização
+            });
 
-app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-});
+            res.send('Texto atualizado com sucesso no GitHub');
+        } catch (error) {
+            console.error('Erro ao atualizar o texto:', error);
+            res.status(500).send('Erro ao atualizar o texto');
+        }
+    });
+
+    app.listen(port, () => {
+        console.log(`Servidor rodando em http://localhost:${port}`);
+    });
 })();
