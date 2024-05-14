@@ -10,7 +10,7 @@ const port = 3000;
 app.use(bodyParser.json());
 
 // Substitua 'TOKEN_GITHUB' pelo seu token de acesso pessoal do GitHub
-const octokit = new Octokit({ auth: process.env.TOKEN_GITHUB });
+const octokit = new Octokit({ auth: process.env.TOKEN });
 
 app.post('/update-text', async (req, res) => {
     const { index, texto } = req.body; // 'index' não é usado neste exemplo
