@@ -191,6 +191,17 @@ font-family: 'Fira Sans', sans-serif;
     left: 0;
     width: 100%;
  
+    .blog-slider__video {
+      width: 300px;
+      top: -144px;
+      position: absolute;
+      flex-shrink: 0;
+      height: 292px;
+      box-shadow: 4px 13px 30px 1px rgba(252, 56, 56, 0.2);
+      border-radius: 22px;
+      transform: translateX(-149px);
+      overflow: hidden;
+    }
     
 }
   &__pagination {
